@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+
+  "name": "click.in",
+  "description": "This extension redirects new tabs to use cluck.in.",
+  "version": "0.1",
+
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+
+  "background": {
+    "scripts": ["background_5.js"]
+  }
+}
