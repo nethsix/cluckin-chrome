@@ -175,7 +175,8 @@ var myOnBeforeRequestListener = function(details) {
     // NOTE: If we can detect whether there's opener here we won't need
     //       to use tabs.onUpdated.
     // IMPT: Remember to change to foolish.row3.org/blank.html
-    return { redirectUrl: 'http://localhost:8080/blank.html?esc_url='+escape(details.url)+'&cluckin_method=pdf' };
+//    return { redirectUrl: 'http://localhost:8080/blank.html?esc_url='+escape(details.url)+'&cluckin_method=pdf' };
+    return { redirectUrl: 'http://foolish.row3.org:1337/blank.html?esc_url='+escape(details.url)+'&cluckin_method=pdf' };
   }
 };
 var filter = { urls: ["http://*/*", "https://*/*"] };
