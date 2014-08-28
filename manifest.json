@@ -16,6 +16,14 @@
     "scripts": ["background.js"]
   },
 
+  "content_scripts": [
+    {
+      "matches": ["http://*/*"],
+      "js": ["stop.js"],
+      "run_at": "document_start"
+    }
+  ],
+
   "browser_action": {
     "default_title": "C.I",
     "default_icon": "icon.png",
