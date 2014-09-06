@@ -123,7 +123,6 @@ function myOnCreatedListener(tab) {
           //DEBUG alert("query unesc_url:"+unesc_url);
           updateProperties = new Object();
           if (tabStoreObj.openerTabNone) {
-//            var new_url = "http://foolish.row3.org?keywords="+escape(unesc_url)+"&cluckin_method="+cluckin_method;
             var new_url = "http://foolish.row3.org?keywords="+escape(unesc_url)+"&cluckin_method="+cluckin_method_global;
             //DEBUG alert("query url:"+new_url);
             updateProperties.url = new_url;
@@ -165,6 +164,39 @@ chrome.runtime.onConnect.addListener(function(port) {
         }
       }
     });
+  } else if (port.name == 'tabinfo') {
+    // Let the caller know whether this url on the tab has been sray processed
+    port.onMessage.addListener(function(msg) {
+      var tabId = null;
+      // Need to get the tabId, so call chrome.tabs.getSelected
+      chrome.tabs.getSelected(null, function(tab) {
+        tabId = tab.id
+        console.log('tab.id' + tab.id);
+        console.log('msg.method' + msg.method);
+        console.log('msg.parm_1' + msg.parm_1);
+        console.log('msg.parm_2' + msg.parm_2);
+
+        if (msg.method == 'get') {
+          if (msg.parm_1 == 'srayProcessed') {
+            console.log('tab_id:' + tabId);
+            var srayTabObject = tabsStore[tabId];
+            console.log('tabsStore[tabId]:');
+            console.log(srayTabObject);
+            var answer = {};
+            if (srayTabObject != null) {
+              answer.answer = srayTabObject.srayProcessed;
+            } else {
+              answer.answer = null;
+            }
+            console.log('get answer:');
+            console.log(answer);
+            port.postMessage(answer);
+          }
+        } else if (msg.method == 'set') {
+          // We don't set tabProcessed from here BUT maybe we should!
+        }
+      }); 
+    });
   }
 });
 
@@ -202,9 +234,8 @@ var myOnBeforeRequestListener = function(details) {
     // NOTE: If we can detect whether there's opener here we won't need
     //       to use tabs.onUpdated.
     // IMPT: Remember to change to foolish.row3.org/blank.html
-//    return { redirectUrl: 'http://localhost:8080/blank.html?esc_url='+escape(details.url)+'&cluckin_method=pdf' };
+//    return { redirectUrl: 'http://localhost:8080/blank.html?esc_url='+escape(details.url)+'&cluckin_method='+cluckin_method_global };
     var cluckin_method = $('#ci-options input[name="cluckin_method"]');
-/////    return { redirectUrl: 'http://foolish.row3.org:1337/blank.html?esc_url='+escape(details.url)+'&cluckin_method=pdf' };
     return { redirectUrl: 'http://foolish.row3.org:1337/blank.html?esc_url='+escape(details.url)+'&cluckin_method='+cluckin_method_global };
   }
 };
