@@ -1,7 +1,7 @@
 {
   "name": "cluck.in",
-  "description": "This extension redirects new tabs to use cluck.in.",
-  "version": "0.1",
+  "description": "Redirects non-browser application links to use cluck.in, which prevents you from being tracked, and displays read-only version of the web page, thus protecting you from malicious websites.",
+  "version": "0.1.0.1",
   "manifest_version": 2,
 
   "permissions": [
@@ -15,14 +15,6 @@
   "background": {
     "scripts": ["background.js"]
   },
-
-  "content_scripts": [
-    {
-      "matches": ["http://*/*"],
-      "js": ["stop.js"],
-      "run_at": "document_start"
-    }
-  ],
 
   "browser_action": {
     "default_title": "C.I",
