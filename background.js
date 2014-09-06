@@ -40,7 +40,7 @@ function myOnUpdatedListener(tab) {
       tabStoreObj = new Object();
       tabsStore[tabId] = tabStoreObj;
     }
-    //alert("onUpdated tabStoreObj.srayProcessed:"+tabStoreObj.srayProcessed);
+    //DEBUG alert("onUpdated tabStoreObj.srayProcessed:"+tabStoreObj.srayProcessed);
     if (tabStoreObj.srayProcessed) {
       // Processing already so ignore
       // Thus whatever change is made to url will just be what
