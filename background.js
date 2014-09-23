@@ -123,7 +123,12 @@ function myOnCreatedListener(tab) {
           //DEBUG alert("query unesc_url:"+unesc_url);
           updateProperties = new Object();
           if (tabStoreObj.openerTabNone) {
-            var new_url = "http://foolish.row3.org?keywords="+escape(unesc_url)+"&cluckin_method="+cluckin_method_global;
+            var new_url = null;
+            if (cluckin_method_global == 'off') {
+              new_url = unesc_url;
+            } else {
+              new_url = "http://foolish.row3.org?keywords="+escape(unesc_url)+"&cluckin_method="+cluckin_method_global;
+            }
             //DEBUG alert("query url:"+new_url);
             updateProperties.url = new_url;
           } else {
@@ -236,7 +241,13 @@ var myOnBeforeRequestListener = function(details) {
     // IMPT: Remember to change to foolish.row3.org/blank.html
 //    return { redirectUrl: 'http://localhost:8080/blank.html?esc_url='+escape(details.url)+'&cluckin_method='+cluckin_method_global };
     var cluckin_method = $('#ci-options input[name="cluckin_method"]');
-    return { redirectUrl: 'http://foolish.row3.org:1337/blank.html?esc_url='+escape(details.url)+'&cluckin_method='+cluckin_method_global };
+    var redirectUrlStr = null;
+    if (cluckin_method == 'off') {
+      redirectUrlStr = details.url;
+    } else {
+      redirectUrlStr = 'http://foolish.row3.org:1337/blank.html?esc_url='+escape(details.url)+'&cluckin_method='+cluckin_method;
+    }
+    return { redirectUrl: redirectUrlStr };
   }
 };
 var filter = { urls: ["http://*/*", "https://*/*"] };
