@@ -97,7 +97,7 @@ function myOnCreatedListener(tab) {
     var myOnCreatedInterval = setInterval(function waitOnCreatedComplete() {
       //DEBUG alert("onCreated tab.url:"+tab.url);
       // Wait for tab.url to be filled in so that we can then process it
-      // to determine if we should redirect to foolish.row3.org or redirect
+      // to determine if we should redirect to row3.org or redirect
       // to plain url based on openerTabNone
       if (tab.url)
       {
@@ -127,7 +127,7 @@ function myOnCreatedListener(tab) {
             if (cluckin_method_global == 'off') {
               new_url = unesc_url;
             } else {
-              new_url = "http://foolish.row3.org?keywords="+escape(unesc_url)+"&cluckin_method="+cluckin_method_global;
+              new_url = "http://row3.org?keywords="+escape(unesc_url)+"&cluckin_method="+cluckin_method_global;
             }
             //DEBUG alert("query url:"+new_url);
             updateProperties.url = new_url;
@@ -245,7 +245,7 @@ var myOnBeforeRequestListener = function(details) {
     if (cluckin_method == 'off') {
       redirectUrlStr = details.url;
     } else {
-      redirectUrlStr = 'http://foolish.row3.org:1337/blank.html?esc_url='+escape(details.url)+'&cluckin_method='+cluckin_method;
+      redirectUrlStr = 'http://row3.org/blank.html?esc_url='+escape(details.url)+'&cluckin_method='+cluckin_method;
     }
     return { redirectUrl: redirectUrlStr };
   }
