@@ -240,12 +240,13 @@ var myOnBeforeRequestListener = function(details) {
     //       to use tabs.onUpdated.
     // IMPT: Remember to change to foolish.row3.org/blank.html
 //    return { redirectUrl: 'http://localhost:8080/blank.html?esc_url='+escape(details.url)+'&cluckin_method='+cluckin_method_global };
-    var cluckin_method = $('#ci-options input[name="cluckin_method"]');
     var redirectUrlStr = null;
-    if (cluckin_method == 'off') {
+    if (cluckin_method_global == 'off') {
       redirectUrlStr = details.url;
     } else {
-      redirectUrlStr = 'http://row3.org/blank.html?esc_url='+escape(details.url)+'&cluckin_method='+cluckin_method;
+      // NOTE: We cannot use row3.org because of redirection will will mess
+      //       up url resulting in gosafe.htmlblank.html
+      redirectUrlStr = 'http://foolish.row3.org:1337/blank.html?esc_url='+escape(details.url)+'&cluckin_method='+cluckin_method_global;
     }
     return { redirectUrl: redirectUrlStr };
   }
