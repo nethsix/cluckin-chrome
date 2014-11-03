@@ -241,10 +241,16 @@ var myOnBeforeRequestListener = function(details) {
     // IMPT: Remember to change to foolish.row3.org/blank.html
 //    return { redirectUrl: 'http://localhost:8080/blank.html?esc_url='+escape(details.url)+'&cluckin_method='+cluckin_method_global };
     var redirectUrlStr = null;
-    if (cluckin_method_global == 'off') {
+    // Skip processing url IF:
+    // - cluckin is off
+    // - browser is trying to open a new page because
+    //   we put in keywords into the url input, we will get something like
+    //   https://www.google.co.jp/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=<keywords>
+    if ((cluckin_method_global == 'off') || (details.url.match(/google\.co.*webhp.*sourceid/))) {
       redirectUrlStr = details.url;
     } else {
-      // NOTE: We cannot use row3.org because of redirection will will mess
+      // NOTE: We cannot use http://row3.org because of
+      ///      redirection will will mess
       //       up url resulting in gosafe.htmlblank.html
       redirectUrlStr = 'http://foolish.row3.org:1337/blank.html?esc_url='+escape(details.url)+'&cluckin_method='+cluckin_method_global;
     }

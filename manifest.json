@@ -1,7 +1,7 @@
 {
   "name": "cluck.in",
   "description": "Redirects clicked links on non-browsers to cluck.in, which prevents you from being tracked, and displays read-only of web pages.",
-  "version": "0.1.0.5",
+  "version": "0.1.0.6",
   "manifest_version": 2,
 
   "permissions": [
